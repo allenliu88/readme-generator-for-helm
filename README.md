@@ -1,5 +1,7 @@
 # Readme Generator For Helm
 
+From: https://github.com/bitnami-labs/readme-generator-for-helm
+
 - Autogenerate Helm Charts READMEs' tables based on values YAML file metadata.
 - Autogenerate an OpenAPI compliant JSON schema defining the `values.yaml` structure of the Helm Chart. The file generated will be a JSON file formatted according to the [OpenAPIv3 SchemaObject](https://spec.openapis.org/oas/v3.1.0#schema-object) definition.
 
@@ -32,12 +34,12 @@ The table that will be inserted into the `readme.md` will have the following str
 
 ...
 
-## Others
+## Notes
 ```
 
-The number of `#` characters needed for the section titles is dynamically calculated, and the title of the `Parameters` section can be configured via the [configuration file](#configuration-file). The `README.md` file with a `## Parameters` section and at least one `## Others` section(the name `Others` is arbitrary) must be created before running the tool.
+The number of `#` characters needed for the section titles is dynamically calculated, and the title of the `Parameters` section can be configured via the [configuration file](#configuration-file). The `README.md` file with a `## Parameters` section and at least one `## Others` section(the name `Notes` is arbitrary) must be created before running the tool.
 
-> 注意：使用前必须提前创建`README.md`及`values.schema.json`两个文件，初始的`README.md`文件中必须包含两个区段，一个是`## Parameters`起始阶段，另外一个是任意名称的`## Others`二级标题作为结束阶段，工具每次执行都会把从`## Parameters`起始阶段开始到`下一个二级标题`结束阶段之间的内容`全部删除并替换`！！！也即，最终自动生成的参数表格将会在这`两个二级标题之间`插入若干个`三级标题`作为参数内容，更新时也是替换这中间的内容，如果不包含另外一个`二级标题`，结果就是`不属于参数表格的内容可能会被误删除`。
+> 注意：使用前必须提前创建`README.md`及`values.schema.json`两个文件，初始的`README.md`文件中必须包含两个区段，一个是`## Parameters`起始阶段（且只能包含一次`## Parameters`二级区段，如果存在多个时，也会出现错误，无法正常使用），另外一个是任意名称的`## Notes`二级标题作为结束阶段，工具每次执行都会把从`## Parameters`起始阶段开始到`下一个二级标题`结束阶段之间的内容`全部删除并替换`！！！也即，最终自动生成的参数表格将会在这`两个二级标题之间`插入若干个`三级标题`作为参数内容，更新时也是替换这中间的内容，如果不包含另外一个`二级标题`，结果就是`不属于参数表格的内容可能会被误删除`。
 
 ## Requirements
 
@@ -48,7 +50,7 @@ The project has been developed and tested with node version `16.x`.
 Execute the following commands to install the tool:
 
 ```console
-git clone https://github.com/bitnami-labs/readme-generator-for-helm
+git clone https://github.com/allenliu88/readme-generator-for-helm
 sudo npm install -g ./readme-generator-for-helm
 sudo readme-generator -v values.yaml -r README-params.md -s values.schema.json
 ```
@@ -60,7 +62,7 @@ Depending on how you installed NodeJS in your system, you may need to modify you
 Execute the following commands to create a single executable binary for the tool:
 
 ```console
-git clone https://github.com/bitnami-labs/readme-generator-for-helm
+git clone https://github.com/allenliu88/readme-generator-for-helm
 cd ./readme-generator-for-helm
 npm install -g pkg
 pkg . -o readme-generator-for-helm
